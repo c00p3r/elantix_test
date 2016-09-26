@@ -15,7 +15,7 @@
                                 $classes[] = 'has-error';
                             } ?>
                             <div class="{{ implode(' ', $classes) }}">
-                                {{ Form::label($user_field, ucfirst($user_field)) }}
+                                {{ Form::label($user_field, ucfirst(str_replace("_", " ", $user_field))) }}
                                 @if($user_field == 'gender')
                                     {{ Form::select($user_field, array('', 'Male', 'Female'), null, ['class' => 'form-control']) }}
                                 @else
