@@ -68,7 +68,6 @@
     </div>
 </nav>
 
-
 <div class="container" id="messages-container">
     @if (Session::has('messages'))
         @foreach(Session::get('messages') as $message)
