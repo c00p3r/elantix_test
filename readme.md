@@ -5,4 +5,4 @@
 * authentication
 * user account page
 * user edit page
-* TODO: all data passed via AJAX
+* edit user via AJAX
