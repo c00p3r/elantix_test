@@ -30,4 +30,43 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * Get the user's gender.
+     *
+     * @param  string  $value
+     * @return string
+     */
+    public function getGenderAttribute($value)
+    {
+        if( $value ) {
+            $variants = array('', 'Male', 'Female');
+            return $variants[$value];
+        }
+        return null;
+    }
+
+    /**
+     * Set the user's gender.
+     *
+     * @param  string  $value
+     * @return string
+     */
+    /*public function setGenderAttribute($value)
+    {
+        switch ($value) {
+            case '':
+                $value = 0;
+                break;
+            case 'Male':
+                $value = 1;
+                break;
+            case 'Female':
+                $value = 2;
+                break;
+        }
+
+        return $value;
+    }*/
+
 }

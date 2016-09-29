@@ -5784,4 +5784,11 @@ button.close {
   font-size: 84px;
   font-weight: 100; }
 
+.profile-info table {
+  table-layout: fixed; }
+
+.profile-info table td:first-child {
+  text-align: right;
+  font-weight: bold; }
+
 /*# sourceMappingURL=app.css.map */

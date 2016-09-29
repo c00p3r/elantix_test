@@ -5,6 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    {{--<meta name="csrf-token" content="{{ csrf_token() }}">--}}
+
     <title>{{ config('app.name') }}</title>
 
     <!-- Fonts -->
@@ -65,7 +67,7 @@
     </div>
 </nav>
 
-<div class="container">
+<div class="container" id="messages-container">
     @if (Session::has('messages'))
         @foreach(Session::get('messages') as $msg_type => $msg_text)
             <div class="alert alert-dismissible alert-{{ $msg_type }}">
@@ -78,7 +80,7 @@
 
 @yield('content')
 
-<script src="/js/app.js"></script>
+<script src="/js/vendors.js"></script>
 
 @yield('footer')
 
