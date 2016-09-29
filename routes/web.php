@@ -12,10 +12,11 @@
 */
 
 Route::get('/', function () {
-    return view('auth.login');
+    return view('welcome')->with('messages', array('info' => 'hello'));
 });
 
 Auth::routes();
 
 Route::get('/account', 'UserController@account');
+
 Route::resource('users', 'UserController');

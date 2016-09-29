@@ -7,7 +7,6 @@
                 <div class="panel panel-default">
                     <div class="panel-heading text-center">Edit Profile</div>
                     {{ Form::model($user, ['action' => ['UserController@update', $user->id], 'method' => 'PUT', 'class' => 'form']) }}
-                    {{ method_field('PUT') }}
                     <div class="panel-body">
                         @foreach($user['editable'] as $user_field)
                             <?php $classes = array('form-group') ?>
@@ -15,9 +14,10 @@
                                 $classes[] = 'has-error';
                             } ?>
                             <div class="{{ implode(' ', $classes) }}">
-                                {{ Form::label($user_field, ucfirst($user_field)) }}
+                                {{ Form::label($user_field, ucfirst(str_replace("_", " ", $user_field))) }}
                                 @if($user_field == 'gender')
-                                    {{ Form::select($user_field, array('', 'Male', 'Female'), null, ['class' => 'form-control']) }}
+                                    <?php $list = array('', 'Male', 'Female') ?>
+                                    {{ Form::select($user_field, $list, array_search($user->$user_field, $list), ['class' => 'form-control']) }}
                                 @else
                                     {{ Form::text($user_field, null, ['class' => 'form-control']) }}
                                 @endif
@@ -37,7 +37,13 @@
 
 
 @section('footer')
+    <script src="/js/core.js"></script>
     <script>
-
+        $(function () {
+            $('form').on('submit', function (e) {
+                e.preventDefault();
+                core.updateUser('{{ action('UserController@update', $user->id) }}', $(this).serialize());
+            });
+        });
     </script>
 @endsection

@@ -21,7 +21,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        // show users list
     }
 
     /**
@@ -31,28 +31,7 @@ class UserController extends Controller
      */
     public function account()
     {
-       return self::show(Auth::user()->id);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+        return self::show(Auth::user()->id);
     }
 
     /**
@@ -88,11 +67,56 @@ class UserController extends Controller
      */
     public function update($id, updateUserRequest $request)
     {
-        $user = User::findOrFail($id);
+        $user = User::find($id);
         $user->fill($request->all());
-        $user->save();
-        Session::flash('messages', array('success' => 'Your profile have been updated'));
+
+
+        if ($user->save()) {
+            $response = array(
+                'response' => 'success',
+                'message'  => array(
+                    'type' => 'success',
+                    'text' => 'Your profile have been updated',
+                ),
+            );
+        } else {
+            $response = array(
+                'response' => 'fail',
+                'message'  => array(
+                    'type' => 'danger',
+                    'text' => 'Something went wrong while updating user',
+                ),
+            );
+        }
+
+        if ($request->expectsJson()) {
+            return response()->json($response, 200);
+        }
+
+        Session::flash('messages', $response['message']);
+
         return self::show($id);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        //
     }
 
     /**

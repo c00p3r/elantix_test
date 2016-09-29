@@ -1,0 +1,22 @@
+/*
+* Welcome page
+*/
+.flex-center {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  height: 80vh;
+}
+.title {
+  color: #636b6f;
+  font-family: 'Raleway', sans-serif;
+  font-size: 84px;
+  font-weight: 100;
+}
+.profile-info table {
+  table-layout: fixed;
+}
+.profile-info table td:first-child {
+  text-align: right;
+  font-weight: bold;
+}
