@@ -45,7 +45,8 @@
                 @else
                     <li class="navbar-btn">
                         <div class="btn-group">
-                            <a href="{{ action('UserController@show', Auth::id()) }}" class="btn btn-default">{{ Auth::user()->username }}</a>
+                            <a href="{{ action('UserController@show', Auth::id()) }}"
+                               class="btn btn-default">{{ Auth::user()->username }}</a>
                             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                                 <span class="caret"></span>
                             </button>
@@ -67,12 +68,17 @@
     </div>
 </nav>
 
+
 <div class="container" id="messages-container">
     @if (Session::has('messages'))
-        @foreach(Session::get('messages') as $msg_type => $msg_text)
-            <div class="alert alert-dismissible alert-{{ $msg_type }}">
-                <button class="close" data-dismiss="alert">&times;</button>
-                {{ $msg_text }}
+        @foreach(Session::get('messages') as $message)
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <div class="alert alert-{{ $message['type'] }} alert-dismissible">
+                        <button class="close" data-dismiss="alert">&times;</button>
+                        {{ $message['text'] }}
+                    </div>
+                </div>
             </div>
         @endforeach
     @endif

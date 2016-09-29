@@ -85,7 +85,7 @@ class Handler extends ExceptionHandler
             return response()->json($response, 401);
         }
 
-        Session::flash('messages', $response['messgae']);
+        Session::flash('messages', array($response['message']));
 
         return redirect()->guest('login');
     }
